@@ -211,10 +211,7 @@ pub fn restore(
     magiskboot_path: Option<PathBuf>,
     flash: bool,
 ) -> Result<()> {
-    let tmpdir = tempfile::Builder::new()
-        .prefix("KernelSU")
-        .tempdir()
-        .context("create temp dir failed")?;
+    let tmpdir = tempdir::TempDir::new("KernelSU").context("create temp dir failed")?;
     let workdir = tmpdir.path();
     let magiskboot = find_magiskboot(magiskboot_path, workdir)?;
 
@@ -369,10 +366,7 @@ fn do_patch(
         );
     }
 
-    let tmpdir = tempfile::Builder::new()
-        .prefix("KernelSU")
-        .tempdir()
-        .context("create temp dir failed")?;
+    let tmpdir = tempdir::TempDir::new("KernelSU").context("create temp dir failed")?;
     let workdir = tmpdir.path();
 
     // extract magiskboot
